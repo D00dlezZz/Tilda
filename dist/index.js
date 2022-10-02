@@ -19,9 +19,9 @@ function SetValues(data) {
     }else {
         addBtn.style.display = "none"
     }
-    
+    const images = JSON.parse(data.images)
+    mainPhoto.src = images[0].img
 }
-
 GetItem().then((data) => SetValues(data));
 
 

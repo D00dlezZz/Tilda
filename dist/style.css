@@ -8,7 +8,7 @@
 
 body {
     background: #fff;
-    padding: 20px;
+    padding: 20px 40px;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
@@ -57,6 +57,7 @@ section {
 .main-info__description {
     font-size: 1.5rem;
     margin-bottom: 20px;
+    width: 70%;
 }
 
 .main-info__old-price {
@@ -90,4 +91,15 @@ button {
     color: #fff;
     background: linear-gradient( #F37354 30%, #FABE0E 60%);
     outline: none;
+}
+
+.images-container {
+    width: 50%;
+    height: 100%;
+}
+
+.main-photo {
+    width: 70%;
+    object-fit: fill;
+    border-radius: 20px;
 }
