@@ -11,32 +11,17 @@
     <title>Tilda</title>
 </head>
 <body>
-    <header class="header">
-        <img src="./img/TildaLogo.svg" alt="Logo" class="header-logo">
-        <img src="./img/Cart.svg" alt="Cart" class="header-cart">
+    <header>
+        <nav class="navigation">
+            <img src="./img/TildaLogo.svg" alt="Logo" class="header-logo">
+            <div style="position: relative">
+                <img src="./img/Cart.svg" alt="Cart" class="header-cart">
+                <counter class="counter" id="counter"></counter>
+            </div>
+        </nav>
     </header>
     <main>
-    <section>
-        <div class="main-info">
-            <h1 id="title" class="main-info__title"></h1>
-            <p id="quantity" class="main-info__quantity"></p>
-            <h4 class="main-info__description-title">Description</h4>
-            <p id="description" class="main-info__description"></p>
-            <div class="price-container">
-                <div>
-                    <p id="price" class="main-info__price"></p>
-                    <p id="oldPrice" class="main-info__old-price"></p>
-                </div>
-                <button id="addBtn">Add to card</button>
-            </div>
-        </div>
-        <div class="images-container">
-            <img alt="Main photo" id="mainPhoto" class="main-photo">
-            <div>
-                
-            </div>
-        </div>
-    </section>
+        <ui-proguct/>
     </main>
     <script src="./index.js" type="module"></script>
 </body>
