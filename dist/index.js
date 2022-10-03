@@ -19,6 +19,12 @@ class UiProduct extends HTMLElement {
         e.classList.add('active');
     }
 
+    addItem() {
+        if (+counter.innerText < this.product.quantity) {
+            counter.innerText = +counter.innerText + 1;
+        }
+    }
+
     async fetchProduct() {
         try {
             const response = await fetch('https://store.tildacdn.com/api/tgetproduct/');
@@ -32,45 +38,56 @@ class UiProduct extends HTMLElement {
 
     async connectedCallback() {
         await this.fetchProduct();
-        this.render();
+        this.render(); 
         const images = document.querySelectorAll('#images');
         const mainImg = document.getElementById('mainImg');
+        const counter = document.getElementById('counter');
+        const addBtn = document.getElementById('addBtn');
+
+        addBtn.addEventListener('click', () => this.addItem());
+
         images[0].classList.add('active')
         images.forEach((e) => {
             e.addEventListener('click', () => this.changeMainImg(event.target))
         })
+
     }
 
     render() {
         this.innerHTML = ` 
-        <section>
-        <div class="product">
-            <div class="product__image">
-                <div class="product__switch">
-                ${this.images.map((img) => {
-                    return `<img src="${img.img}" alt="headphones" id="images">`
-                })}
-                </div>
-                <div class="product__main-img">
-                    <img src="${this.images[0].img}" alt="Main Photo" id="mainImg">
-                </div>
-            </div>
-            <div class="product__main">
-                <h1 class="product__title" id="title">${this.product.title}</h1>
-                <div class="product__info">
-                    <div class="product__quantity" id="quantity">In stok: ${this.product.quantity}</div>
-                    <h3 class="product__description-title">Description:</h3>
-                    <span class="product__description" id="description">${this.product.descr}</span>
-                    <div class="product__price product-price">
-                        <span class="product-price__current" id="price">${this.product.price} USD</span>
-                        <span class="product-price__old" id="oldPrice">${this.product.priceold} USD</span>
+        <section class="product-wrapper">
+            <div class="product">
+                <div class="product__image">
+                    <div class="product__switch">
+                    ${this.images.map(element => {
+                        return `<img src="${element.img}" alt="headphones" id="images"/>`
+                    }).join('')
+                    }
+                    </div>
+                    <div class="product__main-img">
+                        <img src="${this.images[0].img}" alt="Main Photo" id="mainImg">
                     </div>
                 </div>
-                <button class="product__add-btn">Add to cart</button>
+                <div class="product__main">
+                    <h1 class="product__title" id="title">${this.product.title}</h1>
+                    <div class="product__info">
+                        <div class="product__quantity" id="quantity">In stok: ${this.product.quantity}</div>
+                        <h3 class="product__description-title">Description:</h3>
+                        <span class="product__description" id="description">${this.product.descr}</span>
+                        <div class="product__price product-price">
+                            <span class="product-price__current" id="price">${this.product.price} USD</span>
+                            <span class="product-price__old" id="oldPrice">${this.product.priceold} USD</span>
+                        </div>
+                    </div>
+                    <button class="product__add-btn" id="addBtn">
+                        <p>Add to cart</p>
+                        <img src="./img/Cart.svg" alt="Cart">
+                        <p id="counter">0</p>
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
-        ` 
+        </section>
+    ` 
     }
 }
 
